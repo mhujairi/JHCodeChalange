@@ -1,16 +1,22 @@
 ﻿
+using System.Text.Json.Serialization;
+
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace TwitterApi
 {
     public class Tweet
     {
         /// <summary>
         /// The unique identifier of the requested Tweet.
-        /// se this to programmatically retrieve a specific Tweet.
+        /// Use this to programmatically retrieve a specific Tweet.
         /// </summary>
         /// <example>
         /// "id": "1050118621198921728"
         /// </example>
-        public string id { get; set; }
+        [JsonPropertyName("id")]
+
+        public string? Id { get; set; }
 
         /// <summary>
         /// The actual UTF-8 text of the Tweet. See twitter-text for details on what characters are currently considered valid.    
@@ -19,21 +25,22 @@ namespace TwitterApi
         /// <example>
         /// "text": "To make room for more expression, we will now count all emojis as equal—including those with gender‍‍‍ ‍‍and skin tone modifiers 👍🏻👍🏽👍🏿. This is now reflected in Twitter-Text, our Open Source library. \n\nUsing Twitter-Text? See the forum post for detail: https://t.co/Nx1XZmRCXA"
         /// </example>
-        public string text { get; set; }
+        [JsonPropertyName("text")]
+        public string? Text { get; set; }
 
         /// <summary>
-        /// nique identifiers indicating all versions of a Tweet. For Tweets with no edits, there will be one ID. For Tweets with an edit history, there will be multiple IDs, arranged in ascending order reflecting the order of edits. The most recent version is the last position of the array.
-
-        /// se this information to find the edit history of a Tweet.
+        /// Unique identifiers indicating all versions of a Tweet. For Tweets with no edits, there will be one ID. For Tweets with an edit history, there will be multiple IDs, arranged in ascending order reflecting the order of edits. The most recent version is the last position of the array.
+        /// Use this information to find the edit history of a Tweet.
         /// </summary>
         /// <example>
         /// "edit_history_tweet_ids": [  "1584717154800521216"]
         /// </example>
-        public string[] edit_history_tweet_ids { get; set; }
+        [JsonPropertyName("edit_history_tweet_ids")]
+        public string[]? EditHistoryTweetIds { get; set; }
 
         /// <summary>
         /// Specifies the type of attachments (if any) present in this Tweet.
-        /// nderstanding the objects returned for requested expansions 
+        /// understanding the objects returned for requested expansions 
         /// </summary>
         /// <example>
         /// "attachments": {
@@ -49,7 +56,8 @@ namespace TwitterApi
         ///     ]
         /// }
         /// </example>
-        public object attachments { get; set; }
+        [JsonPropertyName("attachments")]
+        public object? Attachments { get; set; }
 
         /// <summary>
         /// The unique identifier of the User who posted this Tweet.
@@ -58,7 +66,8 @@ namespace TwitterApi
         /// <example>
         /// "author_id": "2244994945"
         /// </example>
-        public string author_id { get; set; }
+        [JsonPropertyName("author_id")]
+        public string? AuthorId { get; set; }
 
         /// <summary>
         /// Contains context annotations for the Tweet.
@@ -92,27 +101,35 @@ namespace TwitterApi
         ///     }
         /// ]
         /// </example>
-        public ContextAnnotation context_annotations { get; set; }
+        [JsonPropertyName("context_annotations")]
+        public object? ContextAnnotations { get; set; }
+
 
         /// <summary>
-        /// conversation_id
-        /// string
-        /// The Tweet ID of the original Tweet of the conversation (which includes direct replies, replies of replies).
-        /// "conversation_id": "1050118621198921728"
-        /// se this to reconstruct the conversation from a Tweet.
-        /// created_at
         /// date (ISO 8601)
         /// Creation time of the Tweet.
-        /// "created_at": "2019-06-04T23:12:08.000Z"
         /// This field can be used to understand when a Tweet was created and used for time-series analysis etc. 
         /// </summary>
         /// <example>
+        /// "created_at": "2019-06-04T23:12:08.000Z"
         /// </example>
-        public string conversation_id { get; set; }
+        [JsonPropertyName("created_at")]
+        public DateTime? CreatedAt { get; set; }
+
+
+        /// <summary>
+        /// The Tweet ID of the original Tweet of the conversation (which includes direct replies, replies of replies).
+        /// Use this to reconstruct the conversation from a Tweet.  
+        /// </summary>
+        /// <example>
+        /// "conversation_id": "1050118621198921728"
+        /// </example>
+        [JsonPropertyName("conversation_id")]
+        public string? ConversationId { get; set; }
 
         /// <summary>
         /// When present, this indicates how much longer the Tweet can be edited and the number of remaining edits. Tweets are only editable for the first 30 minutes after creation and can be edited up to five times.
-        /// se this to determine if a Tweet is eligible for editing.
+        /// Use this to determine if a Tweet is eligible for editing.
         /// </summary>
         /// <example>
         /// "edit_controls": {
@@ -121,13 +138,13 @@ namespace TwitterApi
         ///   "editable_until": "2022-10-25T01:53:06.000Z"
         /// }
         /// </example>
-        public object edit_controls { get; set; }
-
+        [JsonPropertyName("edit_controls")]
+        public object? EditControls { get; set; }
 
         /// <summary>
         /// Entities that have been parsed out of the text of the Tweet. Additionally, see entities in Twitter Objects.
-        /// Entities are JSON objects that provide additional information about hashtags, urls, user mentions, and cashtags associated with a Tweet. Reference each respective entity for further details.
-        /// Please note that all start indices are inclusive. The majority of end indices are exclusive, except for entities.annotations.end, which is currently inclusive. We will be changing this to exclusive with our v3 bump since it is a breaking change. 
+        /// Entities are JSON objects that provide additional information about hash tags, URLs, user mentions, and cash tags associated with a Tweet. Reference each respective entity for further details.
+        /// Please note that all start indicates are inclusive. The majority of end indicates are exclusive, except for entities.annotations.end, which is currently inclusive. We will be changing this to exclusive with our v3 bump since it is a breaking change. 
         /// </summary>
         /// <example>
         /// "entities": {
@@ -176,7 +193,8 @@ namespace TwitterApi
         ///     ]
         /// }
         /// </example>
-        public object entities { get; set; }
+        [JsonPropertyName("entities")]
+        public object? Entities { get; set; }
 
         /// <summary>
         /// If the represented Tweet is a reply, this field will contain the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.
@@ -185,7 +203,8 @@ namespace TwitterApi
         /// <example>
         /// "in_reply_to_user_id": "2244994945"
         /// </example>
-        public string in_reply_to_user_id { get; set; }
+        [JsonPropertyName("in_reply_to_user_id")]
+        public string? InReplyToUserId { get; set; }
 
         /// <summary>
         /// Language of the Tweet, if detected by Twitter. Returned as a BCP47 language tag.
@@ -194,7 +213,8 @@ namespace TwitterApi
         /// <example>
         /// "lang": "en"
         /// </example>
-        public string lang { get; set; }
+        [JsonPropertyName("lang")]
+        public string? Lang { get; set; }
 
         /// <summary>
         /// Non-public engagement metrics for the Tweet at the time of the request. 
@@ -208,7 +228,8 @@ namespace TwitterApi
         ///       "user_profile_clicks": 22
         ///  }
         /// </example>
-        public object non_public_metrics { get; set; }
+        [JsonPropertyName("non_public_metrics")]
+        public object? NonPublicMetrics { get; set; }
 
 
         /// <summary>
@@ -226,7 +247,8 @@ namespace TwitterApi
         ///      "user_profile_clicks": 2
         /// }
         /// </example>
-        public object organic_metrics { get; set; }
+        [JsonPropertyName("organic_metrics")]
+        public object? OrganicMetrics { get; set; }
 
 
         /// <summary>
@@ -234,7 +256,8 @@ namespace TwitterApi
         /// This may also be judged and labeled by an internal Twitter support agent.
         /// Studying circulation of certain types of content.
         /// </summary>
-        public bool possibly_sensitive { get; set; }
+        [JsonPropertyName("possibly_sensitive")]
+        public bool PossiblySensitive { get; set; }
 
 
         /// <summary>
@@ -252,7 +275,8 @@ namespace TwitterApi
         ///       "user_profile_clicks": 2
         ///  }
         /// </example>
-        public object promoted_metrics { get; set; }
+        [JsonPropertyName("promoted_metrics")]
+        public object? PromotedMetrics { get; set; }
 
 
         /// <summary>
@@ -267,7 +291,8 @@ namespace TwitterApi
         ///          "quote_count": 1
         ///  }
         /// </example>
-        public object public_metrics { get; set; }
+        [JsonPropertyName("public_metrics")]
+        public object? PublicMetrics { get; set; }
 
 
         /// <summary>
@@ -290,18 +315,20 @@ namespace TwitterApi
         ///        }
         ///    ]
         /// </example>
-        public object[] referenced_tweets { get; set; }
+        [JsonPropertyName("referenced_tweets")]
+        public object[]? ReferencedTweets { get; set; }
 
 
         /// <summary>
         /// The name of the app the user Tweeted from.
-        /// "source": "Twitter Web App"
         /// Determine if a Twitter user posted from the web, mobile device, or other app.
 
         /// </summary>
         /// <example>
+        /// "source": "Twitter Web App"
         /// </example>
-        public string source { get; set; }
+        [JsonPropertyName("source")]
+        public string? Source { get; set; }
 
         /// <summary>
         /// When present, contains withholding details for withheld content.
@@ -314,7 +341,8 @@ namespace TwitterApi
         ///        ]
         ///    }
         /// </example>
-        public object withheld { get; set; }
+        [JsonPropertyName("withheld")]
+        public object? Withheld { get; set; }
 
     }
 }
