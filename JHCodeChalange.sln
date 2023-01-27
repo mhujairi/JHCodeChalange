@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterApi", "TwitterApi\Tw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JHCodeChalange", "JHCodeChalange\JHCodeChalange.csproj", "{7D3A5C64-6AA6-4E52-9468-5FAC2D0B042E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterApi.Tests", "TwitterApi.Tests\TwitterApi.Tests.csproj", "{A89170BF-E152-4DE3-8FC2-C789F1E7EFC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7D3A5C64-6AA6-4E52-9468-5FAC2D0B042E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D3A5C64-6AA6-4E52-9468-5FAC2D0B042E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D3A5C64-6AA6-4E52-9468-5FAC2D0B042E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A89170BF-E152-4DE3-8FC2-C789F1E7EFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89170BF-E152-4DE3-8FC2-C789F1E7EFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89170BF-E152-4DE3-8FC2-C789F1E7EFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89170BF-E152-4DE3-8FC2-C789F1E7EFC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
