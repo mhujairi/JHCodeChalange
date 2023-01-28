@@ -5,7 +5,7 @@ export class TopHashTags extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true };
+        this.state = { hashtags: [], loading: true };
     }
 
     componentDidMount() {
@@ -43,12 +43,12 @@ export class TopHashTags extends Component {
                 <h1 id="tableLabel">Top 10 Hashtags</h1>
                 {contents}
 
-                <button onClick={async (e) => { await this.populateHashTagsData() } }>Refresh</button>
+                <button onClick={async (e) => { await this.populateData() } }>Refresh</button>
             </div>
         );
     }
 
-    async populateHashTagsData() {
+    async populateData() {
         const response = await fetch('Tweets/TopHashTags/10');
         const data = await response.json();
         this.setState({ hashtags: data, loading: false });
