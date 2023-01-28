@@ -1,6 +1,6 @@
 ﻿make sure to add a user secret as follow:
 
-dotnet user-secrets set "twitter:BearerKey" "<your twitter Bearer Key>"
+dotnet user-secrets set "twitter:BearerKey" "\<your twitter Bearer Key\>"
 
 to the following projects:
 1- JHCodeChalange
