@@ -1,11 +1,10 @@
 import { TweetsCount } from "./components/TweetsCount";
 import { TopHashTags } from "./components/TopHashTags";
-import { Home } from "./components/Home";
 
 const AppRoutes = [
     {
         index: true,
-        element: <Home />
+        element: <TweetsCount />
     },
     {
         path: '/TweetsCount',
