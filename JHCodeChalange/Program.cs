@@ -1,8 +1,40 @@
+using JHCodeChalange.BackgroundServices;
+
+using System.Net.Http.Headers;
+
+using TwitterApi.Data;
+using TwitterApi.Web;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+var baseTwitterAddress = new Uri("https://api.twitter.com");
+var twitterBearerKey = builder.Configuration["twitter:BearerKey"];
+var twitterBearerAuthenticationHeader = new AuthenticationHeaderValue("Bearer", twitterBearerKey);
+var GetHttpClient = () =>
+{
+    var result = new HttpClient
+    {
+        BaseAddress = baseTwitterAddress
+    };
+    result.DefaultRequestHeaders.Authorization = twitterBearerAuthenticationHeader;
+
+    return result;
+};
+builder.Services.AddTransient<Func<HttpClient>>((serviceProvider) => GetHttpClient);
+
+builder.Services.AddTransient<ITwitterClient, SampleTwitterClient>();
+
+var tweetsRepository = new TweetRepository();
+builder.Services.AddSingleton<ITweetRepository>((serviceProvider) => tweetsRepository);
+builder.Services.AddSingleton<IHashTagRepository>((serviceProvider) => tweetsRepository);
+
+builder.Services.AddHostedService<TweetsBackgroundService>();
+
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -17,11 +49,16 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();

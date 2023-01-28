@@ -10,7 +10,7 @@ namespace TwitterApi.Data
 {
     public interface ITweetRepository
     {
-        Task AddAsync(Tweet tweet);
+        Task AddAsync(Tweet tweet, CancellationToken? cancellationToken = null);
 
         Task<int> CountAsync();
     }

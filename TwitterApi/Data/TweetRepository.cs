@@ -7,9 +7,8 @@ namespace TwitterApi.Data
     public class TweetRepository : ITweetRepository, IHashTagRepository
     {
         private int TweetCount { get; set; }
-        Task ITweetRepository.AddAsync(Tweet tweet)
+        Task ITweetRepository.AddAsync(Tweet tweet, CancellationToken? cancellationToken = null)
         {
-
             if (tweet != null)
             {
                 TweetCount++;

@@ -13,11 +13,11 @@ namespace TwitterApi.Web
             getClient = client;
         }
 
-        public async IAsyncEnumerable<Tweet> TweetsAsync()
+        public async IAsyncEnumerable<Tweet> TweetsAsync(CancellationToken? cancellationToken= null)
         {
             var client = getClient();
 
-            using var stream = await client.GetStreamAsync("2/tweets/sample/stream?tweet.fields=entities");
+            using var stream = await client.GetStreamAsync("2/tweets/sample/stream?tweet.fields=entities", (CancellationToken)cancellationToken);
 
             using var streamReader = new StreamReader(stream);
 
