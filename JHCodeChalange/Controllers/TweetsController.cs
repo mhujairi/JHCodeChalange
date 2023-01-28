@@ -20,7 +20,7 @@ public class TweetsController : ControllerBase
 
     [HttpGet]
     [Route("/[controller]/[action]")]
-    public async Task<int> TwwetsCount()
+    public async Task<int> TweetsCount()
     {
         return await tweetRepository.CountAsync();
     }

@@ -1,4 +1,4 @@
-import { Counter } from "./components/Counter";
+import { TweetsCount } from "./components/TweetsCount";
 import { TopHashTags } from "./components/TopHashTags";
 import { Home } from "./components/Home";
 
@@ -8,8 +8,8 @@ const AppRoutes = [
         element: <Home />
     },
     {
-        path: '/counter',
-        element: <Counter />
+        path: '/TweetsCount',
+        element: <TweetsCount />
     },
     {
         path: '/TopHashtags',
