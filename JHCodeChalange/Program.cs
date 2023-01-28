@@ -24,7 +24,7 @@ var GetHttpClient = () =>
 
     return result;
 };
-builder.Services.AddTransient<Func<HttpClient>>((serviceProvider) => GetHttpClient);
+builder.Services.AddSingleton<HttpClient>(GetHttpClient());
 
 builder.Services.AddTransient<ITwitterClient, SampleTwitterClient>();
 

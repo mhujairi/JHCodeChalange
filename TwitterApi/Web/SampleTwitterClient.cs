@@ -7,16 +7,15 @@ namespace TwitterApi.Web;
 
 public class SampleTwitterClient : ITwitterClient
 {
-    private readonly Func<HttpClient> getClient;
-    public SampleTwitterClient(Func<HttpClient> client)
+    private readonly HttpClient client;
+
+    public SampleTwitterClient(HttpClient client)
     {
-        getClient = client;
+        this.client = client;
     }
 
     public async IAsyncEnumerable<Tweet> TweetsAsync(CancellationToken? cancellationToken= null)
     {
-        var client = getClient();
-
         using var stream = await client.GetStreamAsync("2/tweets/sample/stream?tweet.fields=entities", (CancellationToken)cancellationToken);
 
         using var streamReader = new StreamReader(stream);

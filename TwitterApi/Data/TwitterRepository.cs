@@ -19,14 +19,14 @@ public class TwitterRepository : ITweetRepository, IHashTagRepository
         if (tweet != null)
         {
             TweetCount++;
-            if(tweet.Entities?.Hashtags != null)
+            if (tweet.Entities?.Hashtags != null)
             {
-                foreach(var hashTag in tweet.Entities.Hashtags)
+                foreach (var hashTag in tweet.Entities.Hashtags)
                 {
                     if (string.IsNullOrWhiteSpace(hashTag.Tag))
                         continue;
 
-                    hashTags.AddOrUpdate(hashTag.Tag, 1, (key,value) =>
+                    hashTags.AddOrUpdate(hashTag.Tag, 1, (key, value) =>
                     {
                         return value + 1;
                     });
@@ -48,10 +48,10 @@ public class TwitterRepository : ITweetRepository, IHashTagRepository
     }
 
     private readonly ConcurrentDictionary<string, int> hashTags;
+    private static readonly HashtageEntry[] EmptyHashtageEntries = Array.Empty<HashtageEntry>();
     Task<HashtageEntry[]> IHashTagRepository.GetTopHashTagsAsync(int number)
     {
-        if (number == 0 || hashTags.Count == 0)
-            return Task.FromResult(new HashtageEntry[0]);
+        if (number == 0 || hashTags == null || hashTags.Count == 0) return Task.FromResult(EmptyHashtageEntries);
 
         return Task.FromResult(hashTags.OrderByDescending(item => item.Value).Select(item =>
         new HashtageEntry
