@@ -1,7 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace TwitterApi
+using TwitterApi.Model;
+
+namespace TwitterApi.Web
 {
     public class SampleTwitterClient : ITwitterClient
     {
@@ -15,7 +17,7 @@ namespace TwitterApi
         {
             var client = getClient();
 
-            using var stream = await client.GetStreamAsync("2/tweets/sample/stream");
+            using var stream = await client.GetStreamAsync("2/tweets/sample/stream?tweet.fields=entities");
 
             using var streamReader = new StreamReader(stream);
 

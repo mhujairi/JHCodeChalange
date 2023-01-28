@@ -2,6 +2,9 @@ using System.Net.Http.Headers;
 
 using Microsoft.Extensions.Configuration;
 
+using TwitterApi.Data;
+using TwitterApi.Web;
+
 namespace TwitterApi.Tests
 {
     [TestClass]
@@ -32,24 +35,28 @@ namespace TwitterApi.Tests
         }
 
         [TestMethod]
-        public async Task CanRead10Tweets()
+        public async Task Can_read_100_tweets_and_add_them_to_the_tweets_repository()
         {
             var subject = new SampleTwitterClient(GetHttpClient);
+            ITweetRepository tweetRepository = new TweetRepository();
 
             var result = (subject.TweetsAsync()).GetAsyncEnumerator();
+        
+            var addTasks = new List<Task>();
             int i = 0;
-            while (await result.MoveNextAsync())
+            for (; i < 100 && await result.MoveNextAsync(); i++)
             {
                 var tweet = result.Current;
-                Console.WriteLine($"{tweet.AuthorId}: {tweet.Text}");
-
-                if (i >= 10)
-                {
-                    Console.WriteLine("stopped reading");
-                    return;
-                }
-                i++;
+                addTasks.Add(tweetRepository.AddAsync(tweet));
             }
+
+            foreach(var addTask in addTasks)
+            {
+                await addTask;
+            }
+
+            Assert.AreEqual(i, await tweetRepository.CountAsync());
+
         }
     }
 }

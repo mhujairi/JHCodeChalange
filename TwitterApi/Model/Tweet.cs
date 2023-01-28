@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TwitterApi
+namespace TwitterApi.Model
 {
     public class Tweet
     {
@@ -140,7 +140,7 @@ namespace TwitterApi
 
         /// <summary>
         /// Entities that have been parsed out of the text of the Tweet. Additionally, see entities in Twitter Objects.
-        /// Entities are JSON objects that provide additional information about hash tags, URLs, user mentions, and cash tags associated with a Tweet. Reference each respective entity for further details.
+        /// Entities are JSON objects that provide additional information about hashtags, URLs, user mentions, and cashtags associated with a Tweet. Reference each respective entity for further details.
         /// Please note that all start indicates are inclusive. The majority of end indicates are exclusive, except for entities.annotations.end, which is currently inclusive. We will be changing this to exclusive with our v3 bump since it is a breaking change. 
         /// </summary>
         /// <example>
@@ -191,7 +191,7 @@ namespace TwitterApi
         /// }
         /// </example>
         [JsonPropertyName("entities")]
-        public object? Entities { get; set; }
+        public TweetEntries? Entities { get; set; }
 
         /// <summary>
         /// If the represented Tweet is a reply, this field will contain the original Tweet’s author ID. This will not necessarily always be the user directly mentioned in the Tweet.

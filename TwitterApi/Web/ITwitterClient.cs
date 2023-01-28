@@ -1,4 +1,6 @@
-﻿namespace TwitterApi
+﻿using TwitterApi.Model;
+
+namespace TwitterApi.Web
 {
     public interface ITwitterClient
     {
