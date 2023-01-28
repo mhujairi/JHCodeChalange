@@ -1,8 +1,7 @@
-﻿namespace TwitterApi.Model
+﻿namespace TwitterApi.Model;
+
+public class HashtageEntry
 {
-    public class HashtageEntry
-    {
-        public int Count { get; set; }
-        public string Tag { get; set; }
-    }
+    public int Count { get; set; }
+    public string Tag { get; set; }
 }

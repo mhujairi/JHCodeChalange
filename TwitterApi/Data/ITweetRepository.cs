@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 using TwitterApi.Model;
 
-namespace TwitterApi.Data
+namespace TwitterApi.Data;
+
+public interface ITweetRepository
 {
-    public interface ITweetRepository
-    {
-        Task AddAsync(Tweet tweet, CancellationToken? cancellationToken = null);
+    Task AddAsync(Tweet tweet, CancellationToken? cancellationToken = null);
 
-        Task<int> CountAsync();
-    }
-
+    Task<int> CountAsync();
 }
