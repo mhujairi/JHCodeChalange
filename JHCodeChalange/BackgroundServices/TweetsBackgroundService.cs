@@ -20,17 +20,13 @@ namespace JHCodeChalange.BackgroundServices
             this.twitterClient = twitterClient;
             this.tweetRepository = tweetRepository;
         }
-
         protected async override Task ExecuteAsync(CancellationToken cancellationToken)
         {
 
-            var addTasks = new List<Task>();
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    addTasks.Clear();
-
                     logger.LogError($"Starting Stream");
                     var result = (twitterClient.TweetsAsync(cancellationToken)).GetAsyncEnumerator(cancellationToken);
 
@@ -38,7 +34,7 @@ namespace JHCodeChalange.BackgroundServices
                     while (await result.MoveNextAsync())
                     {
                         var tweet = result.Current;
-                        addTasks.Add(tweetRepository.AddAsync(tweet, cancellationToken));
+                        var addTask = tweetRepository.AddAsync(tweet, cancellationToken);
                     }
 
                     logger.LogError($"Stream stopped.. will try restart");
@@ -46,13 +42,6 @@ namespace JHCodeChalange.BackgroundServices
                 catch (Exception ex)
                 {
                     logger.LogError($"Failure while processing Tweets Stream: {ex}");
-                }
-                finally
-                {
-                    foreach (var addTask in addTasks)
-                    {
-                        await addTask;
-                    }
                 }
             }
         }

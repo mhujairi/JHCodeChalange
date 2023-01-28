@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using TwitterApi.Data;
+using TwitterApi.Model;
 
 namespace JHCodeChalange.Controllers
 {
@@ -27,9 +28,17 @@ namespace JHCodeChalange.Controllers
 
         [HttpGet]
         [Route("/[controller]/[action]/{limit}")]
-        public async Task<string[]> TopHashTags(int limit)
+        public async Task<HashtageEntry[]> TopHashTags(int limit)
         {
             return await hashTagRepository.GetTopHashTagsAsync(limit);
         }
+
+        [HttpGet]
+        [Route("/[controller]/[action]")]
+        public async Task<int> HashTagsCount()
+        {
+            return await hashTagRepository.CountAsync();
+        }
+
     }
 }

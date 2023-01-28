@@ -38,7 +38,7 @@ namespace TwitterApi.Tests
         public async Task Can_read_100_tweets_and_add_them_to_the_tweets_repository()
         {
             var subject = new SampleTwitterClient(GetHttpClient);
-            ITweetRepository tweetRepository = new TweetRepository();
+            ITweetRepository tweetRepository = new TwitterRepository(100);
 
             var result = (subject.TweetsAsync()).GetAsyncEnumerator();
         

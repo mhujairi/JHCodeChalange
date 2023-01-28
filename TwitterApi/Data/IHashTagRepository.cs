@@ -1,8 +1,11 @@
-﻿namespace TwitterApi.Data
+﻿using TwitterApi.Model;
+
+namespace TwitterApi.Data
 {
     public interface IHashTagRepository
     {
-        Task<string[]> GetTopHashTagsAsync(int number);
-    }
+        Task<HashtageEntry[]> GetTopHashTagsAsync(int number);
 
+        Task<int> CountAsync();
+    }
 }

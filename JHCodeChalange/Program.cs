@@ -28,7 +28,8 @@ builder.Services.AddTransient<Func<HttpClient>>((serviceProvider) => GetHttpClie
 
 builder.Services.AddTransient<ITwitterClient, SampleTwitterClient>();
 
-var tweetsRepository = new TweetRepository();
+var hashtagsBufferSize = 1000;
+var tweetsRepository = new TwitterRepository(hashtagsBufferSize);
 builder.Services.AddSingleton<ITweetRepository>((serviceProvider) => tweetsRepository);
 builder.Services.AddSingleton<IHashTagRepository>((serviceProvider) => tweetsRepository);
 
