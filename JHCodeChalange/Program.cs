@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var baseTwitterAddress = new Uri("https://api.twitter.com");
-var twitterBearerKey = builder.Configuration["twitter:BearerKey"];
+var twitterBearerKey = builder.Configuration.GetValue("twitter:BearerKey", string.Empty);
 var twitterBearerAuthenticationHeader = new AuthenticationHeaderValue("Bearer", twitterBearerKey);
 var GetHttpClient = () =>
 {
@@ -28,7 +28,7 @@ builder.Services.AddTransient<Func<HttpClient>>((serviceProvider) => GetHttpClie
 
 builder.Services.AddTransient<ITwitterClient, SampleTwitterClient>();
 
-var hashtagsBufferSize = 1000;
+int hashtagsBufferSize = builder.Configuration.GetValue("hashtagsBufferSize",1000);
 var tweetsRepository = new TwitterRepository(hashtagsBufferSize);
 builder.Services.AddSingleton<ITweetRepository>((serviceProvider) => tweetsRepository);
 builder.Services.AddSingleton<IHashTagRepository>((serviceProvider) => tweetsRepository);
