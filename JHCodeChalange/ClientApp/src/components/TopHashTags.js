@@ -9,7 +9,7 @@ export class TopHashTags extends Component {
     }
 
     componentDidMount() {
-        this.populateHashTagsData();
+        this.populateData();
     }
 
     static renderHashTagsTable(hashtags) {
